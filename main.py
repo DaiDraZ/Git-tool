@@ -5,7 +5,7 @@ from tkinter import filedialog, messagebox
 from tkinter import font
 from PIL import Image, ImageTk
 import time
-import webview
+import webview,webbrowser
 
 
 def run_git_command(args: list[str]):
@@ -215,7 +215,7 @@ class User_config(tk.Frame):
         self.name_box.place(relx=0.35,rely=0.45)
 
 
-        self.login_btn = tk.Button(self,width=5,text="Next",command=self.open_browser)
+        self.login_btn = tk.Button(self,width=5,text="Next",command=self.add_ssh_key)
         self.login_btn.place(relx=0.65,rely=0.55)
 
         self.cancel_btn = tk.Button(self,text="Cancel",width=5)
@@ -227,9 +227,9 @@ class User_config(tk.Frame):
 
     def add_ssh_key(self):
         try:
-            result = os.system("start chrome https://github.com/settings/keys")
-        except FileNotFoundError:
-            return "Git does not installed or not available on the system."
+            result = webbrowser.open("https://github.com/settings/keys")
+        except Exception as e:
+            return f"Error opening browser: {e}"
     
     def open_browser(self):
         # window.set_icon('..\\Git tool\\github.png')
@@ -239,10 +239,12 @@ class User_config(tk.Frame):
             width=self.winfo_width(),
             height=self.winfo_height(),
             fullscreen=False,
-            confirm_close=True
+            confirm_close=True,
+            resizable=False
         )
         webview.start(debug=False)
-        window.create_confirmation_dialog(title="Warning !",message="Are you add SSH_KEY ? if you dont,please add ssh_key in your github or generation key again !",)
+        self.login_btn.config(state='disabled')
+
 
 def starting_app():
     output_label.pack(fill="x", pady=5)
