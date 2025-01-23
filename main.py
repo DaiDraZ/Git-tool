@@ -1,11 +1,9 @@
 import subprocess,os
 import tkinter as tk
-from tkinter import FALSE, ttk
-from tkinter import filedialog, messagebox
-from tkinter import font
+from tkinter import ttk, filedialog, messagebox, font
 from PIL import Image, ImageTk
 import time
-import webview,webbrowser
+import webbrowser
 
 
 def run_git_command(args: list[str]):
@@ -18,7 +16,7 @@ def run_git_command(args: list[str]):
         output = result.stdout + result.stderr
         return output
     except FileNotFoundError:
-        return "Git does not installed or not available on the system."
+        return "Git does not installed or not available in the system."
 def ssh_command():
     pass
 
@@ -227,29 +225,15 @@ class User_config(tk.Frame):
 
     def add_ssh_key(self):
         try:
-            result = webbrowser.open("https://github.com/settings/keys")
+            web = webbrowser.open("https://github.com/settings/keys")
         except Exception as e:
             return f"Error opening browser: {e}"
-    
-    def open_browser(self):
-        # window.set_icon('..\\Git tool\\github.png')
-        window = webview.create_window(
-            title="Add SSH Key to your GitHub",
-            url="https://github.com/settings/keys",
-            width=self.winfo_width(),
-            height=self.winfo_height(),
-            fullscreen=False,
-            confirm_close=True,
-            resizable=False
-        )
-        webview.start(debug=False)
-        self.login_btn.config(state='disabled')
 
 
 def starting_app():
     output_label.pack(fill="x", pady=5)
     output_box.pack(fill="both", expand=True, padx=10, pady=5)
-    button_frame.pack(pady=10)
+    button_frame.pack(pady=10)  
 
     ttk.Button(button_frame, text="Khởi tạo Git (init)", command=git_init, width=20).grid(row=0, column=0, padx=5, pady=5)
     ttk.Button(button_frame, text="Trạng thái (status)", command=git_status, width=20).grid(row=0, column=1, padx=5, pady=5)
@@ -259,10 +243,18 @@ def starting_app():
     ttk.Button(button_frame, text="Chuyển nhánh (checkout)", command=git_checkout, width=20).grid(row=2, column=1, padx=5, pady=5)
     ttk.Button(button_frame, text="Merge nhánh", command=git_merge, width=20).grid(row=3, column=0, padx=5, pady=5)
 
-class frame_config(tk.Frame):
+class Frame1(tk.Frame):
     def __init__(self,root) -> None:
-        super.__init__(root)
+        super().__init__(root)
 
+class Frame2(tk.Frame):
+    def __init__(self,root) -> None:
+        super().__init__(root)
+
+
+class Frame3(tk.Frame):
+    def __init__(self,root) -> None:
+        super().__init__(root)
 
 
 # Chạy ứng dụng
