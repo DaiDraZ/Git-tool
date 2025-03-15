@@ -9,7 +9,7 @@ I) Introduce myself
 - WORK: GAME DEV
 
 II) About my software - HolyDra
-    This is an idle to coding same VS code,Sublime text and Notepad++ ... But
+- This is an idle to coding same VS code,Sublime text and Notepad++ ... But
 it has upgrade for easy to working
 
 
