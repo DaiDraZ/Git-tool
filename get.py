@@ -37,23 +37,20 @@ def handle_enter(event, text_widget):
     """Add 4 space"""
     cursor_position = text_widget.index(tk.INSERT)
     
-    # Lấy dòng hiện tại và kiểm tra nếu dòng này không rỗng
+    # check empty lines
     line = text_widget.get(f"{cursor_position.split('.')[0]}.0", f"{cursor_position.split('.')[0]}.end")
     
-    # Tính toán số spaces ở đầu dòng hiện tại
+    # calc left space numbers
     indent_level = len(line) - len(line.lstrip(' '))  # Số khoảng trắng ở đầu dòng
 
-    # Nếu dòng có dấu ":", tăng indent gấp đôi
+    # if line have ":",
     if ":" in line:
         indent_level = indent_level + 4  # Tăng thêm 4 spaces cho dấu ":"
 
-    # Tạo mức indent cho dòng mới
     indent = " " * indent_level
-
-    # Thêm indent cho dòng mới
     text_widget.insert(cursor_position, "\n" + indent)
     
-    return "break"  # Ngừng hành động mặc định của Enter
+    return "break"
 
 def handle_move_up(event, text_widget):
     """Xử lý khi di chuyển lên trên và giảm mức indent nếu cần"""
@@ -62,16 +59,11 @@ def handle_move_up(event, text_widget):
     
     if line_number > 1:
         previous_line = text_widget.get(f"{line_number - 1}.0", f"{line_number - 1}.end")
-        
-        # Kiểm tra nếu dòng trước có dấu ':', giảm mức indent
         indent_level = previous_line.count(':')
-        indent = "    " * indent_level
-        
-        # Di chuyển con trỏ đến dòng trước đó và điều chỉnh indent
+        indent = " " * indent_level * 4
         text_widget.insert(f"{line_number}.0", "\n" + indent)
         return "break"
 
-# Tạo một cửa sổ Tkinter
 root = tk.Tk()
 root.title("Bracket Completion and Highlight Keywords")
 root.geometry("600x400")
