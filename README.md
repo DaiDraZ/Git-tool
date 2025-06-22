@@ -5,9 +5,7 @@
 
 ## 👤 About Me  
 
-- **Full Name:** Truong Van Dai  
-- **Age:** 21  
-- **Gender:** Male  
+- **Full Name:** Truong Van Dai
 - **Profession:** Game Developer  
 
 ---
